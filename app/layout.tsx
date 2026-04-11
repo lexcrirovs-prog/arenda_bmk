@@ -1,38 +1,67 @@
-import type { Metadata, Viewport } from 'next'
-import './globals.css'
-import { Header } from '@/components/layout/Header'
-import { Footer } from '@/components/layout/Footer'
-import { SkipToContent } from '@/components/common/SkipToContent'
-import { buildMetadata, organizationJsonLd } from '@/lib/seo'
-import { siteConfig } from '@/content/seo'
+import type { Metadata } from "next";
+import localFont from "next/font/local";
 
-export const metadata: Metadata = buildMetadata({
-  title: `${siteConfig.name} — аренда мобильных котельных 24/7`,
+import { siteConfig } from "@/lib/site-config";
+
+import "./globals.css";
+
+const sans = localFont({
+  src: "./fonts/GeistVF.woff",
+  variable: "--font-sans",
+  weight: "100 900",
+  display: "swap",
+});
+
+const mono = localFont({
+  src: "./fonts/GeistMonoVF.woff",
+  variable: "--font-mono",
+  weight: "100 900",
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: "Аренда мобильных котельных и БМК",
+    template: `%s | ${siteConfig.shortName}`,
+  },
   description: siteConfig.description,
-  path: '/',
-})
+  keywords: [
+    "аренда паровой котельной",
+    "мобильная бмк в контейнере",
+    "аренда котельной 1 мвт",
+    "дизельная котельная 1 мвт цена",
+    "аренда мобильной котельной",
+    "аренда паровой котельной 1 т/ч",
+    "подменная котельная",
+    "временное тепло для стройки",
+  ],
+  openGraph: {
+    title: "Аренда БМК — мобильные котельные для тепла и пара без CAPEX",
+    description: siteConfig.description,
+    url: siteConfig.url,
+    siteName: siteConfig.shortName,
+    locale: "ru_RU",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
-export const viewport: Viewport = {
-  themeColor: '#1A2B3C',
-  width: 'device-width',
-  initialScale: 1,
-}
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="ru">
-      <body>
-        <SkipToContent />
-        <Header />
-        <main id="main" className="min-h-[60vh]">
-          {children}
-        </main>
-        <Footer />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd()) }}
-        />
+      <body
+        className={`${sans.variable} ${mono.variable} bg-background text-foreground antialiased`}
+      >
+        {children}
       </body>
     </html>
-  )
+  );
 }

@@ -1,95 +1,76 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    './app/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './content/**/*.{ts,tsx}',
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./lib/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    container: {
-      center: true,
-      padding: {
-        DEFAULT: '1rem',
-        sm: '1.5rem',
-        lg: '2rem',
-      },
-      screens: {
-        '2xl': '1360px',
-      },
-    },
     extend: {
       colors: {
+        background: "var(--background)",
+        foreground: "var(--foreground)",
         industrial: {
-          950: '#0F1A26',
-          900: '#1A2B3C',
-          800: '#253649',
-          700: '#344863',
-          600: '#44577A',
+          50: "#edf3f8",
+          100: "#d2e0ed",
+          200: "#b2c8dd",
+          300: "#7b9bb9",
+          400: "#4e7396",
+          500: "#2d4d6c",
+          600: "#1f3851",
+          700: "#1A2B3C",
+          800: "#122030",
+          900: "#0c1722",
         },
         alert: {
-          400: '#F5B041',
-          500: '#F39C12',
-          600: '#D98706',
-          700: '#B36F04',
+          DEFAULT: "#F39C12",
+          soft: "#ffcf7c",
+          dark: "#9c6205",
         },
         slate: {
-          50: '#F8FAFC',
-          100: '#F1F5F9',
-          200: '#E2E8F0',
-          300: '#CBD5E1',
-          400: '#94A3B8',
-          500: '#64748B',
-          600: '#475569',
-          700: '#334155',
-          800: '#1E293B',
-          900: '#0F172A',
+          50: "#f7f9fb",
+          100: "#eef2f6",
+          200: "#d9e1ea",
+          300: "#9aaab9",
+          400: "#6f7f8f",
+          500: "#475666",
+          600: "#344454",
+          700: "#243140",
+          800: "#16222e",
+          900: "#0d141d",
         },
-        accent: {
-          cyan: '#22D3EE',
-        },
-      },
-      fontFamily: {
-        sans: [
-          'Inter',
-          '-apple-system',
-          'BlinkMacSystemFont',
-          'Segoe UI',
-          'Roboto',
-          'system-ui',
-          'sans-serif',
-        ],
-        mono: [
-          'JetBrains Mono',
-          'SFMono-Regular',
-          'ui-monospace',
-          'Menlo',
-          'Consolas',
-          'monospace',
-        ],
       },
       boxShadow: {
-        elev: '0 10px 30px -12px rgba(15, 26, 38, 0.35)',
-        card: '0 1px 2px rgba(15,26,38,0.06), 0 8px 24px -12px rgba(15,26,38,0.18)',
+        panel: "0 24px 80px rgba(9, 18, 29, 0.16)",
+        glow: "0 0 0 1px rgba(243, 156, 18, 0.18), 0 20px 60px rgba(12, 23, 34, 0.35)",
+      },
+      backgroundImage: {
+        "industrial-grid":
+          "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
       },
       keyframes: {
-        'fade-up': {
-          '0%': { opacity: '0', transform: 'translateY(12px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
+        float: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-8px)" },
         },
-        'pulse-ring': {
-          '0%': { boxShadow: '0 0 0 0 rgba(243, 156, 18, 0.55)' },
-          '70%': { boxShadow: '0 0 0 12px rgba(243, 156, 18, 0)' },
-          '100%': { boxShadow: '0 0 0 0 rgba(243, 156, 18, 0)' },
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
       animation: {
-        'fade-up': 'fade-up 0.6s ease-out both',
-        'pulse-ring': 'pulse-ring 2s infinite',
+        float: "float 8s ease-in-out infinite",
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },
   plugins: [],
-}
-
-export default config
+};
+export default config;

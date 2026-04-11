@@ -1,2 +1,0 @@
-Файл robots.txt генерируется динамически в app/robots.ts.
-Sitemap — в app/sitemap.ts.

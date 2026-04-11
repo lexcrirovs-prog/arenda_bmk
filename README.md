@@ -1,75 +1,36 @@
-# Арена-БМК — сайт аренды мобильных котельных
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-B2B-сайт для аренды мобильных блочно-модульных котельных (БМК), реализующий стратегию цифровой предпродажной подготовки: каталог, инженерный калькулятор, кейсы, сервисный процесс и сертификация.
+## Getting Started
 
-## Технический стек
-
-- **Next.js 14** (App Router, React Server Components, TypeScript strict)
-- **Tailwind CSS** — enterprise дизайн-система
-- **Radix UI / shadcn-style** примитивы — доступность WCAG 2.2 AA
-- **Framer Motion** — scroll-storytelling и hero-анимации
-- **React Hook Form + Zod** — валидируемые инженерные формы
-- **next/font** (Inter + JetBrains Mono) — самохостинг шрифтов, без FOUT
-
-## Запуск
+First, run the development server:
 
 ```bash
-npm install
-npm run dev        # http://localhost:3000
-npm run build      # production сборка
-npm run typecheck  # строгая проверка типов
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-## Структура
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-- `app/` — маршруты App Router
-- `components/sections/` — секции главной страницы
-- `components/catalog/`, `components/calculator/` — функциональные модули
-- `components/ui/` — Radix-примитивы
-- `content/` — типизированный контент (продукты, кейсы, сертификаты)
-- `lib/` — утилиты: форматирование, SEO, константы
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## Ключевые страницы
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-| URL | Назначение |
-|---|---|
-| `/` | Главная: hero, каталог, калькулятор, процесс, кейсы, сертификация |
-| `/catalog` | Bento-grid каталог с фильтрами и сравнением (до 4 моделей) |
-| `/catalog/[slug]` | Карточка модели: техпаспорт, PDF, DWG, JSON-LD Product |
-| `/calculator` | Инженерный расчёт мощности с захватом лида |
-| `/compare` | Сравнение выбранных моделей |
-| `/cases`, `/cases/[slug]` | Реализованные проекты |
-| `/services` | Turnkey-процесс, водоподготовка, FAQ, сертификация |
-| `/about` | О компании |
-| `/contact` | Отправка ТЗ, контакты баз |
-| `/sitemap.xml`, `/robots.txt` | SEO |
+## Learn More
 
-## Инженерный калькулятор
+To learn more about Next.js, take a look at the following resources:
 
-Формула: `Q (кВт) = S · q · N · k_h · k_i · k_f`
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-- `S` — площадь (50…20 000 м²)
-- `q = 0,131` кВт/м² — удельные теплопотери
-- `N = 1,2` — коэффициент запаса (ГВС + экстремум)
-- `k_h` — поправка на высоту потолков
-- `k_i` — поправка на утепление
-- `k_f` — поправка на тип объекта (пищевое / фарма / производство / офис / склад)
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-Результат: рекомендованная модель БМК из каталога + месячная ставка + PDF
-техспецификации + форма захвата лида (отправляется в `/api/lead`).
+## Deploy on Vercel
 
-## Доступность
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-- `lang="ru"`, `SkipToContent`
-- Focus-visible с кольцом фокуса по всему сайту
-- Все интерактивные элементы с клавиатурными аналогами
-- `prefers-reduced-motion` выключает анимации
-- Семантические landmarks, `aria-label`, `aria-current` в навигации
-
-## SEO
-
-- `generateMetadata` на каждой странице
-- `sitemap.ts` собирает все продукты и кейсы
-- `robots.ts` блокирует `/api/`
-- JSON-LD: `Organization` в layout, `Product` на карточках моделей
-- Open Graph + Twitter cards
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

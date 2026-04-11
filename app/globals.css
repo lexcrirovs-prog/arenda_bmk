@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --industrial-950: 15 26 38;
+    --industrial-900: 26 43 60;
+    --industrial-800: 37 54 73;
+    --alert-500: 243 156 18;
+    --accent-cyan: 34 211 238;
+  }
+
+  * {
+    @apply border-slate-200;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 font-sans antialiased;
+    font-feature-settings: 'ss01', 'cv11';
+  }
+
+  ::selection {
+    background-color: rgba(243, 156, 18, 0.35);
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-alert-500 ring-offset-2 ring-offset-slate-50 rounded-[2px];
+  }
+
+  .dark :focus-visible {
+    @apply ring-offset-industrial-900;
+  }
+
+  h1, h2, h3, h4, h5 {
+    @apply font-semibold tracking-tight text-industrial-900;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .container-pro {
+    @apply container max-w-[1360px];
+  }
+
+  .tech-number {
+    @apply font-mono tabular-nums text-accent-cyan;
+  }
+
+  .section {
+    @apply py-16 sm:py-20 lg:py-28;
+  }
+
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  @media (max-width: 1023px) {
+    .bento-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 639px) {
+    .bento-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .bento-item {
+    @apply rounded-2xl border border-slate-200 bg-white p-6 shadow-card transition
+           hover:-translate-y-0.5 hover:shadow-elev;
+  }
+}

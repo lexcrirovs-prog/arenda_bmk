@@ -12,8 +12,9 @@ export function generateStaticParams() {
   return cases.map((c) => ({ slug: c.slug }))
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const c = getCaseBySlug(params.slug)
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const c = getCaseBySlug(slug)
   if (!c) return buildMetadata({ title: 'Кейс не найден' })
   return buildMetadata({
     title: c.title,
@@ -22,8 +23,9 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   })
 }
 
-export default function CasePage({ params }: { params: { slug: string } }) {
-  const c = getCaseBySlug(params.slug)
+export default async function CasePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const c = getCaseBySlug(slug)
   if (!c) notFound()
 
   const equipment = c.equipmentUsed

@@ -3,6 +3,8 @@ import { siteConfig } from '@/content/seo'
 import { products } from '@/content/products'
 import { cases } from '@/content/cases'
 
+export const dynamic = 'force-static'
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.url
   const now = new Date()

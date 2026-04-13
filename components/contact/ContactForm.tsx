@@ -41,16 +41,9 @@ export function ContactForm() {
   })
 
   async function onSubmit(values: ContactInput) {
-    try {
-      await fetch('/api/lead', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ source: 'contact', lead: values }),
-      })
-      setSent(true)
-    } catch (e) {
-      console.error(e)
-    }
+    const { submitLead } = await import('@/lib/lead')
+    await submitLead({ source: 'contact', lead: values })
+    setSent(true)
   }
 
   if (sent) {

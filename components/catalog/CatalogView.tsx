@@ -1,7 +1,8 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import { Flame, Droplets, Scale, X } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -30,12 +31,20 @@ const ALL_FUELS: { value: FuelType; label: string }[] = [
 
 const POWER_STEPS = [0, 1, 3, 5, 10]
 
-export function CatalogView({ initialType }: { initialType?: BoilerType }) {
+export function CatalogView() {
+  const searchParams = useSearchParams()
   const [filters, setFilters] = useState<Filters>({
-    types: initialType ? [initialType] : [],
+    types: [],
     fuels: [],
     minPowerMW: 0,
   })
+
+  useEffect(() => {
+    const typeParam = searchParams.get('type')
+    if (typeParam === 'steam' || typeParam === 'hotwater') {
+      setFilters((f) => ({ ...f, types: [typeParam] }))
+    }
+  }, [searchParams])
   const [compareIds, setCompareIds] = useState<string[]>([])
 
   const filtered = useMemo(() => {

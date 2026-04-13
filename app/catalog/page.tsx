@@ -1,7 +1,7 @@
+import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import { CatalogView } from '@/components/catalog/CatalogView'
 import { buildMetadata } from '@/lib/seo'
-import type { BoilerType } from '@/content/products'
 
 export const metadata: Metadata = buildMetadata({
   title: 'Каталог мобильных котельных',
@@ -15,16 +15,7 @@ export const metadata: Metadata = buildMetadata({
   ],
 })
 
-interface Props {
-  searchParams: { type?: string }
-}
-
-export default function CatalogPage({ searchParams }: Props) {
-  const initialType =
-    searchParams.type === 'steam' || searchParams.type === 'hotwater'
-      ? (searchParams.type as BoilerType)
-      : undefined
-
+export default function CatalogPage() {
   return (
     <>
       <section className="bg-industrial-900 py-14 text-slate-50">
@@ -42,7 +33,9 @@ export default function CatalogPage({ searchParams }: Props) {
           </p>
         </div>
       </section>
-      <CatalogView initialType={initialType} />
+      <Suspense>
+        <CatalogView />
+      </Suspense>
     </>
   )
 }

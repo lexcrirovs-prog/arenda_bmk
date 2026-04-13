@@ -28,27 +28,20 @@ export function LeadCaptureStep({ calcInput, result, onSubmitted }: Props) {
   })
 
   async function onSubmit(values: LeadInput) {
-    try {
-      await fetch('/api/lead', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          source: 'calculator',
-          lead: values,
-          calc: {
-            input: calcInput,
-            result: {
-              correctedKW: result.correctedKW,
-              model: result.recommended.id,
-              monthlyRate: result.monthlyRate,
-            },
-          },
-        }),
-      })
-      onSubmitted()
-    } catch (e) {
-      console.error(e)
-    }
+    const { submitLead } = await import('@/lib/lead')
+    await submitLead({
+      source: 'calculator',
+      lead: values,
+      calc: {
+        input: calcInput,
+        result: {
+          correctedKW: result.correctedKW,
+          model: result.recommended.id,
+          monthlyRate: result.monthlyRate,
+        },
+      },
+    })
+    onSubmitted()
   }
 
   return (
